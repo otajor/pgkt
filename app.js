@@ -24,6 +24,7 @@ const CONTRACT_ADDRESS = '0x2A44b6A77584D64dd4616917183b3761F43162Ca'
 const requestAccount = ({ address, privateKey, telephone }) => {
   console.log(address, privateKey, telephone, '<<<<<<<<<<<<<<<< REQUESTING ACCOUNT')
   return new Promise((resolve, reject) => {
+    console.log(web3.isConnected(), '<<<<<<<<< IS CONNECTED')
     const callData = pgktContractInstance.requestAccount.getData(telephone)
     const nonceHex = web3.toHex(web3.eth.getTransactionCount(address) + 1)
     const gasPrice = web3.eth.gasPrice
