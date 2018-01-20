@@ -3,9 +3,9 @@ const sendTransaction = require('./sendTransaction.js')
 const buyKT = require('./buyKT.js')
 const sellKT = require('./sellKT.js')
 
-module.exports = {
-  retrieveBalance,
-  sendTransaction,
+module.exports = ({ socket }) => {
+  retrieveBalance({ socket }),
+  sendTransaction({ socket }),
   buyKT,
-  sellKT
+  sellKT,
 }

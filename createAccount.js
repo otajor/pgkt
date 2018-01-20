@@ -3,7 +3,7 @@ const fetchUnusedAddress = require('./db/fetchUnusedAddress.js')
 const updateAddress = require('./db/updateAddress.js')
 const requestAccount = require('./blockchain/requestAccount.js')
 
-const createAccount = ({ req, res, telephone }) => {
+const createAccount = ({ socket }) => ({ req, res, telephone }) => {
   const telephoneInt = telephone.replace('+', '')
   return fetchUnusedAddress()
     .then(({ address, privateKey }) => {
