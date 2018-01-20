@@ -11,20 +11,22 @@ class IssueCoins extends Component {
       >
         <div style={styles.div}>
         <Form>
-          <Col xs={6} md={5}>
-        		<FormGroup controlId="enterAmount" style={styles.enterAmount}>
-        			<InputGroup.Addon>$</InputGroup.Addon>
+          <Col xs={6} md={6}>
+            <FormGroup controlId="enterAmount" style={styles.enterAmount}>
+              <InputGroup.Addon>
+                $
+              </InputGroup.Addon>
             <FormControl type="number" placeholder="Enter Amount" />
-        		</FormGroup>{' '}
+            </FormGroup>
           </Col>
-          <Col xs={6} md={4}>
+          <Col xs={6} md={3}>
             <FormGroup controlId='issueType'>
               <FormControl componentClass="select" placeholder="Issue Type" required>
-                <option value=""></option>
+                <option value="">Select</option>
                 <option value="Loan">Loan</option>
                 <option value="CashBuy">Cash Buy</option>
               </FormControl>
-            </FormGroup>{' '}
+            </FormGroup>
           </Col>
           <Col xsHidden md={3}>
       		    <Button type="submit">Submit</Button>
@@ -38,7 +40,8 @@ class IssueCoins extends Component {
 
 const styles = {
   div: {
-    padding: '20px',
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   enterAmount: {
     display: 'flex',

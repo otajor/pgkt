@@ -45,11 +45,8 @@ class Account extends Component {
           ? (
             <div>
               <div style={{...styles.rowContainer, ...styles.topContainer}}>
-                <AccountOverview
-                  accounts={accounts}
-                  currentAccount={currentAccount}
-                />
-                <Transactions transactions={transactions[currentAccount]}/>
+                <AccountOverview account={accounts[currentAccount]} />
+                <Transactions transactions={transactions[currentAccount]} />
               </div>
               <div style={{ ...styles.rowContainer, ...styles.bottomContainer }}>
                 <IssueCoins />
@@ -95,6 +92,8 @@ const styles = {
     display: 'inline-block',
   },
   rowContainer: {
+    width: '95%',
+    margin: 'auto',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',

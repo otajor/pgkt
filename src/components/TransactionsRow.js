@@ -36,7 +36,6 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    height: 20,
   },
   topLeft: {
     fontSize: 9,
