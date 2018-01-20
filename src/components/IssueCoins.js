@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, InputGroup, FormControl, DropdownButton, MenuItem, Button, Col } from 'react-bootstrap';
+import { Form, FormGroup, InputGroup, FormControl, Button, Col } from 'react-bootstrap';
 import AccountPanel from './AccountPanel';
 
 class IssueCoins extends Component {
