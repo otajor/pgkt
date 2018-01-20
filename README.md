@@ -1,4 +1,7 @@
 # PGKT
+
+[![Join the chat at https://gitter.im/pgkt/Lobby](https://badges.gitter.im/pgkt/Lobby.svg)](https://gitter.im/pgkt/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Cryptocurrency tethered to the Papua New Guinea Kina (PGK - national currency of Papua New Guinea).
 
 This repo will demonstrate an MVP product with the following capabilities:
