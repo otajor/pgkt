@@ -1,12 +1,8 @@
 const knex = require('./client.js')
 
-const checkBalance = () =>
-  knex('accounts')
+const getAllData = () =>
+  knex('eth_addresses')
   .select('*')
-  .innerJoin(
-    'eth_addresses',
-    'eth_addresses.account_id', '=', 'accounts.id'
-  )
   .catch(console.log)
 
-module.exports = checkBalance
+module.exports = getAllData

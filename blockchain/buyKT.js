@@ -1,10 +1,11 @@
 const { pgktContractInstance, web3 } = require('./web3Client.js')
 const Tx = require('ethereumjs-tx')
+const CONTRACT_ADDRESS = '0x2A44b6A77584D64dd4616917183b3761F43162Ca'
 
-const buyKT = ({ fromAddress, toAddress, value, privateKey }) => {
+const buyKT = ({ address, privateKey, amount }) => {
   return new Promise((resolve, reject) => {
-    const callData = pgktContractInstance.methods.buyKT.getData(fromAddress)
-    const nonceHex = web3.toHex(web3.eth.getTransactionCount(fromAddress))
+    const callData = pgktContractInstance.buyKT.getData(amount)
+    const nonceHex = web3.toHex(web3.eth.getTransactionCount(address))
     const gasPrice = web3.eth.gasPrice
     const gasPriceHex = web3.toHex(gasPrice)
     const gasLimitHex = web3.toHex(300000)
@@ -13,25 +14,22 @@ const buyKT = ({ fromAddress, toAddress, value, privateKey }) => {
       nonce: nonceHex,
       gasPrice: gasPriceHex,
       gasLimit: gasLimitHex,
-      to: toAddress,
-      from: fromAddress,
+      to: CONTRACT_ADDRESS,
+      from: address,
       value: '0x00',
       data: callData
     }
     const tx = new Tx(rawTx)
-    tx.sign(privateKey)
+    tx.sign(Buffer.from(privateKey, 'hex'))
     const serializedTx = tx.serialize()
-    web3.eth.sendRawTransaction(serializedTx.toString('hex'), function (err, hash) {
+    web3.eth.sendRawTransaction('0x' + serializedTx.toString('hex'), (err, hash) => {
       if (err) {
-        console.log('Error:')
-        console.log(err)
+        reject(err)
       } else {
-        console.log('Transaction receipt hash pending')
-        console.log(hash)
+        resolve(hash)
       }
     })
   })
 }
-
 
 module.exports = buyKT
