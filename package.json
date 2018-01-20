@@ -12,10 +12,13 @@
     "web3": "^0.20.4"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "start:react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
   }
 }
