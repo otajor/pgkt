@@ -8,10 +8,10 @@ const createAccount = ({ req, res, telephone }) => {
   return fetchUnusedAddress()
     .then(({ address, privateKey }) => {
       console.log('GOT ADDRESS: ', { address, privateKey })
-      return requestAccount({ address, privateKey, telephoneInt })
+      return requestAccount({ address, privateKey, telephone: telephoneInt })
       .then((hash) => {
         console.log('GOT ACCOUNT: ', hash)
-        return updateAddress({ privateKey, telephoneInt })
+        return updateAddress({ privateKey, telephone: telephoneInt })
       })
       .then((res) => {
         console.log('UPDATEDD ADDRESS: ', res)
