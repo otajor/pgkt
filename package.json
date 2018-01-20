@@ -12,7 +12,8 @@
     "web3": "^0.20.4"
   },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "startmon": "nodemon app.js",
     "start:react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
