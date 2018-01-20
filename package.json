@@ -5,11 +5,13 @@
   "dependencies": {
     "express": "^4.16.2",
     "knex": "^0.14.2",
+    "moment": "^2.20.1",
     "pg": "^7.4.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.0",
+    "uuid": "^3.2.1",
     "web3": "^0.20.4"
   },
   "scripts": {
