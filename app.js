@@ -17,9 +17,30 @@
 
 // app.listen(process.env.PORT || 4000, () => console.log('Example app listening on port 4000!'))
 
+const express = require('express')
+const bodyParser = require('body-parser')
+
+const app = express()
+
+const path = require('path')
+// const webhookHandler = require('./routes/webhook.js')
+// const getAllDataHandler = require('./routes/getAllAccountData.js')
+
+// Middleware
+app.use(bodyParser.urlencoded({extended: false}))
+
+// Routes
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')))
+// app.get('/get-all-account-data', getAllDataHandler)
+// app.post('/webhook', webhookHandler)
+
+app.listen(process.env.PORT || 4000, () => console.log('Example app listening on port 4000!'))
+
 const { pgktContractInstance, web3 } = require('./blockchain/web3Client.js')
 const Tx = require('ethereumjs-tx')
 const CONTRACT_ADDRESS = '0x2A44b6A77584D64dd4616917183b3761F43162Ca'
+console.log(web3.isConnected(), '<<<<<<<<< IS CONNECTED')
+
 
 const requestAccount = ({ address, privateKey, telephone }) => {
   console.log(address, privateKey, telephone, '<<<<<<<<<<<<<<<< REQUESTING ACCOUNT')
@@ -60,23 +81,3 @@ requestAccount({
   privateKey: '4081bc5523e6721c9c341d3d74f8431bec363ed7e211cf318bc906daa8499821',
   telephone: '447772899770'
 })
-
-const express = require('express')
-const bodyParser = require('body-parser')
-
-const app = express()
-
-const path = require('path')
-// const webhookHandler = require('./routes/webhook.js')
-// const getAllDataHandler = require('./routes/getAllAccountData.js')
-
-// Middleware
-app.use(bodyParser.urlencoded({extended: false}))
-
-// Routes
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')))
-// app.get('/get-all-account-data', getAllDataHandler)
-// app.post('/webhook', webhookHandler)
-
-app.listen(process.env.PORT || 4000, () => console.log('Example app listening on port 4000!'))
-
