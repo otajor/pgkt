@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AccountPanel from './AccountPanel';
+import { Col } from 'react-bootstrap';
 
 class AccountOverview extends Component {
   render() {
@@ -9,10 +10,18 @@ class AccountOverview extends Component {
         style={this.props.containerStyle}
       >
         <div>
-          <p>Children go here</p>
-          <p>Children go here</p>
-          <p>Children go here</p>
-          <p>Children go here</p>
+          <Col xs={6} md={6}>
+            <p><span style={styles.textTitle}>Public Key:</span></p>
+          </Col>
+          <Col xs={6} md={6}>
+            <p>{this.props.accounts[this.props.currentAccount].publicKey}</p>
+          </Col>
+          <Col xs={6} md={6}>
+            <p><span style={styles.textTitle}>Balance:</span></p>
+          </Col>
+          <Col xs={6} md={6}>
+            <p>{this.props.accounts[this.props.currentAccount].balance}</p>
+          </Col>
         </div>
       </AccountPanel>
     );
@@ -20,7 +29,10 @@ class AccountOverview extends Component {
 }
 
 const styles = {
-
+  textTitle: {
+    textDecorationLine: "underline",
+    textDecorationStyle: "solid",
+  }
 };
 
 export default AccountOverview;
