@@ -20,6 +20,7 @@ const createAccount = ({ req, res, telephone }) => {
         `)
       })
     })
+    .catch(console.log)
 }
 
 module.exports = createAccount
