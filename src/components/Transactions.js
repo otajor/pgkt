@@ -8,6 +8,7 @@ class Transactions extends Component {
   render() {
     return (
       <AccountPanel
+        formatAsBody
         title='Transactions'
         style={this.props.containerStyle}
       >

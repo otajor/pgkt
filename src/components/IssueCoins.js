@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, InputGroup, FormControl, Button, Col } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, Button, Col } from 'react-bootstrap';
 import AccountPanel from './AccountPanel';
 
 class IssueCoins extends Component {
@@ -11,20 +11,19 @@ class IssueCoins extends Component {
       >
         <div style={styles.div}>
         <Form>
-          <Col xs={6} md={5}>
-        		<FormGroup controlId="enterAmount" style={styles.enterAmount}>
-        			<InputGroup.Addon>$</InputGroup.Addon>
-            <FormControl type="number" placeholder="Enter Amount" />
-        		</FormGroup>{' '}
+          <Col xs={5} md={5}>
+            <FormGroup controlId="enterAmount" style={styles.enterAmount}>
+              <FormControl type="number" placeholder="Enter Amount" />
+            </FormGroup>
           </Col>
           <Col xs={6} md={4}>
             <FormGroup controlId='issueType'>
               <FormControl componentClass="select" placeholder="Issue Type" required>
-                <option value=""></option>
+                <option value="">Select Issue Type</option>
                 <option value="Loan">Loan</option>
                 <option value="CashBuy">Cash Buy</option>
               </FormControl>
-            </FormGroup>{' '}
+            </FormGroup>
           </Col>
           <Col xsHidden md={3}>
       		    <Button type="submit">Submit</Button>
@@ -38,7 +37,8 @@ class IssueCoins extends Component {
 
 const styles = {
   div: {
-    padding: '20px',
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   enterAmount: {
     display: 'flex',

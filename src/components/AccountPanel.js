@@ -2,21 +2,29 @@ import React from 'react';
 import { Panel } from 'react-bootstrap';
 
 const AccountPanel = (props) => (
-  <Panel style={props.containerStyle}>
+  <Panel
+    bsStyle="info"
+    style={props.containerStyle}
+  >
     <Panel.Heading style={styles.panelHeading}>
       <Panel.Title>
         {props.title}
       </Panel.Title>
     </Panel.Heading>
-    <Panel.Body>
-      {props.children}
-    </Panel.Body>
+    {props.formatAsBody
+      ? (
+        <Panel.Body>
+          {props.children}
+        </Panel.Body>
+      )
+      : props.children
+    }
   </Panel>
 );
 
 AccountPanel.defaultProps = {
   containerStyle: {
-    width: '45%',
+    width: '47.5%',
     marginVertical: 20,
     marginLeft: '1.25%',
     marginRight: '1.25%',
