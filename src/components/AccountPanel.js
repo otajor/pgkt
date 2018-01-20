@@ -20,7 +20,6 @@ AccountPanel.defaultProps = {
     marginVertical: 20,
     marginLeft: '1.25%',
     marginRight: '1.25%',
-    height: '40vh',
     display: 'inline-block',
   },
 };
