@@ -58,3 +58,6 @@ typings/
 .env
 
 package-lock.json
+
+# twilio credentials
+config.env.js

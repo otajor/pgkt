@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "env2": "^2.2.0",
     "express": "^4.16.2",
     "knex": "^0.14.2",
     "moment": "^2.20.1",
@@ -12,13 +14,18 @@
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.0",
     "uuid": "^3.2.1",
+    "twilio": "^3.11.0",
     "web3": "^0.20.4"
   },
   "scripts": {
     "start": "node app.js",
+    "startmon": "nodemon app.js",
     "start:react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
   }
 }
