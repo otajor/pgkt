@@ -14,30 +14,39 @@ class Account extends Component {
     super();
     this.state = {
       // pick the first phone number from the accounts object
-      currentPhoneNumber: Object.keys(accounts)[0]
+      currentAccount: Object.keys(accounts)[0]
     };
   }
-  render() {
-    const { currentPhoneNumber } = this.state;
 
+  setCurrentAccount(phoneNumber) {
+    this.setState({ currentAccount: phoneNumber });
+  }
+
+  render() {
+    const { currentAccount } = this.state;
     return (
       <div>
         <div style={styles.navbar}>
           <div style={styles.accountTitleContainer}>
             <span style={styles.accountTitle}>
-              Account #{currentPhoneNumber}
+              Account #{currentAccount}
             </span>
           </div>
           <div style={styles.searchBarContainer}>
-            <SearchBar height={NAVBAR_HEIGHT} />
+            <SearchBar
+              accounts={accounts}
+              currentAccount={currentAccount}
+              navbarHeight={NAVBAR_HEIGHT}
+              onSubmit={(value) => this.setCurrentAccount(value)}
+            />
           </div>
         </div>
         <div style={{...styles.rowContainer, ...styles.topContainer}}>
           <AccountOverview
             accounts={accounts}
-            currentAccount={currentPhoneNumber}
+            currentAccount={currentAccount}
           />
-          <Transactions transactions={transactions[currentPhoneNumber]}/>
+          <Transactions transactions={transactions[currentAccount]}/>
         </div>
         <div style={{...styles.rowContainer, ...styles.bottomContainer}}>
           <IssueCoins />

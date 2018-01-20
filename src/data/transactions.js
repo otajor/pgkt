@@ -5,11 +5,11 @@ const transactions = {
     //{ Description:
     // Datetime
     // Amount
-    // recipient phonenumber},
+    // recipient phoneNumber},
     //{ Description:
     // Datetime
     // Amount
-    // recipient phonenumber},
+    // recipient phoneNumber},
   //]
   '07479869730': [
     {
@@ -27,7 +27,7 @@ const transactions = {
       recipientPhoneNumber: '07826138109',
     },
   ],
-  '074837492432': [
+  '07483942794': [
     {
       id: uuid(),
       description: 'Amazon Uk retail',

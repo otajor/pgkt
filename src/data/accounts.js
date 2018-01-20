@@ -1,5 +1,5 @@
 const accounts = {
- //phonenumber: {
+ //phoneNumber: {
    // public Key
    // balance
    // Loan amount
