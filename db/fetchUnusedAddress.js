@@ -9,5 +9,3 @@ const fetchUnusedAddress = () =>
   .catch(console.log)
 
 module.exports = fetchUnusedAddress
-
-fetchUnusedAddress().then(console.log)
