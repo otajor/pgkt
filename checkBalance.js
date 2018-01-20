@@ -1,10 +1,22 @@
 const sendSMS = require('./sms/index');
+const retrieveBalance = require('./blockchain/retrieveBalance.js')
+const getAccount = require('./db/getAccount.js')
 
 const checkBalance = ({ req, res, telephone }) => {
   // 1. Retrieve balance of ETH wallet
-  // 2. Reply with success SMS stating balance
-  sendSMS(telephone, 'Your balance: $$$$');
-  res.send('check balance');
+  getAccount({ telephone })
+  .then((res) => {
+    return retrieveBalance(res.address)
+  })
+  .then((res) => {
+    sendSMS(telephone, 'Your balance: $$$$');
+    res.set('Content-Type', 'text/xml')
+    res.send(`
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Response>
+      </Response>
+    `);
+  })
 };
 
 module.exports = checkBalance;

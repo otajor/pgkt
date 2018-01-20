@@ -6,7 +6,12 @@ const createAccount = ({ req, res, telephone }) => {
   // 3. Transfer 5 KT into new ETH wallet
   // 3. Reply with success SMS stating new balance
   sendSMS(telephone, 'Your account has been created with 5KT in it');
-  res.send('create account');
+  res.set('Content-Type', 'text/xml')
+  res.send(`
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Response>
+    </Response>
+  `);
 };
 
 module.exports = createAccount;
