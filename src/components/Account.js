@@ -21,7 +21,7 @@ class Account extends Component {
     const { currentPhoneNumber } = this.state;
 
     return (
-      <div style={styles.accountContainer}>
+      <div>
         <div style={styles.navbar}>
           <div style={styles.accountTitleContainer}>
             <span style={styles.accountTitle}>
@@ -29,7 +29,7 @@ class Account extends Component {
             </span>
           </div>
           <div style={styles.searchBarContainer}>
-            <SearchBar />
+            <SearchBar height={NAVBAR_HEIGHT} />
           </div>
         </div>
         <div style={{...styles.rowContainer, ...styles.topContainer}}>
@@ -72,9 +72,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-  },
-  accountContainer: {
-
   },
   topContainer: {
     height: '50vh',
