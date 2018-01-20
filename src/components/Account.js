@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import SearchBar from './SearchBar';
 import AccountOverview from './AccountOverview';
 import Transactions from './Transactions';
 import IssueCoins from './IssueCoins';
 import RepayDebt from './RepayDebt';
 
+// data is hard-coded for now
 import accounts from '../data/accounts';
 import transactions from '../data/transactions';
 
@@ -11,24 +13,40 @@ class Account extends Component {
   constructor() {
     super();
     this.state = {
-      currentPhoneNumber: Object.keys(accounts)[0]
+      // pick the first phone number from the accounts object
+      currentAccount: Object.keys(accounts)[0]
     };
   }
+
+  setCurrentAccount(phoneNumber) {
+    this.setState({ currentAccount: phoneNumber });
+  }
+
   render() {
+    const { currentAccount } = this.state;
     return (
-      <div style={styles.accountContainer}>
-        <div style={styles.phoneNumberContainer}>
-          <h1>Account #{this.state.currentPhoneNumber}</h1>
+      <div>
+        <div style={styles.navbar}>
+          <div style={styles.accountTitleContainer}>
+            <span style={styles.accountTitle}>
+              Account #{currentAccount}
+            </span>
+          </div>
+          <div style={styles.searchBarContainer}>
+            <SearchBar
+              accounts={accounts}
+              currentAccount={currentAccount}
+              navbarHeight={NAVBAR_HEIGHT}
+              onSubmit={(value) => this.setCurrentAccount(value)}
+            />
+          </div>
         </div>
         <div style={{...styles.rowContainer, ...styles.topContainer}}>
           <AccountOverview
             accounts={accounts}
-            currentAccount={this.state.currentPhoneNumber}
+            currentAccount={currentAccount}
           />
-          <Transactions
-            currentAccount={this.state.currentPhoneNumber}
-            transactions={transactions}
-          />
+          <Transactions transactions={transactions[currentAccount]}/>
         </div>
         <div style={{...styles.rowContainer, ...styles.bottomContainer}}>
           <IssueCoins />
@@ -39,17 +57,30 @@ class Account extends Component {
   }
 }
 
+const NAVBAR_HEIGHT = 50;
+
 const styles = {
+  navbar: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    height: NAVBAR_HEIGHT,
+  },
+  accountTitleContainer: {
+    fontSize: 28,
+    height: NAVBAR_HEIGHT,
+    width: '60%',
+    display: 'inline-block',
+    textAlign: 'right',
+  },
+  searchBarContainer: {
+    width: '40%',
+    display: 'inline-block',
+  },
   rowContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-  },
-  phoneNumberContainer: {
-    textAlign: 'center',
-  },
-  accountContainer: {
-
   },
   topContainer: {
     height: '50vh',

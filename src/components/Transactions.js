@@ -12,8 +12,9 @@ class Transactions extends Component {
         style={this.props.containerStyle}
       >
         <ListGroup>
-          {this.props.transactions[this.props.currentAccount]
-            .slice(0,5)
+          {this.props.transactions
+            // TODO paginate this list?
+            .slice(0,5) // get only the first 5
             .map(transaction => (
               <TransactionRow
                 key={transaction.id}
