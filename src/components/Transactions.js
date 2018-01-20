@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+import AccountPanel from './AccountPanel';
 
 class Transactions extends Component {
   render() {
     return (
-      <div style={{}}>
-      </div>
+      <AccountPanel
+        title='Transactions'
+        style={this.props.containerStyle}
+      >
+        <div>
+          <p>Children go here</p>
+          <p>Children go here</p>
+          <p>Children go here</p>
+          <p>Children go here</p>
+        </div>
+      </AccountPanel>
     );
   }
 }

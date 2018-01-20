@@ -8,11 +8,14 @@ class Account extends Component {
   render() {
     return (
       <div style={styles.accountContainer}>
-        <div style={styles.topContainer}>
+        <div style={styles.phoneNumberContainer}>
+          <h1>Phone Number</h1>
+        </div>
+        <div style={[styles.row, styles.topContainer]}>
           <AccountOverview />
           <Transactions />
         </div>
-        <div style={styles.bottomContainer}>
+        <div style={[styles.row, styles.bottomContainer]}>
           <IssueCoins />
           <RepayDebt />
         </div>
@@ -22,11 +25,16 @@ class Account extends Component {
 }
 
 const styles = {
+  rowContainer: {
+    margin: 'auto',
+  },
+  phoneNumberContainer: {
+    textAlign: 'center',
+  },
   accountContainer: {
 
   },
   topContainer: {
-
   },
   bottomContainer: {
 
