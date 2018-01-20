@@ -6,11 +6,14 @@ const requestAccount = require('./blockchain/requestAccount.js')
 const createAccount = ({ req, res, telephone }) => {
   return fetchUnusedAddress()
     .then(({ address, privateKey }) => {
+      console.log('GOT ADDRESS: ', { address, privateKey })
       return requestAccount({ address, privateKey, telephone })
       .then((hash) => {
+        console.log('GOT ACCOUNT: ', hash)
         return updateAddress({ privateKey, telephone })
       })
       .then((res) => {
+        console.log('UPDATEDD ADDRESS: ', res)
         sendSMS(telephone, 'Your account has been created with 5KT in it')
         res.set('Content-Type', 'text/xml')
         res.send(`
@@ -20,7 +23,7 @@ const createAccount = ({ req, res, telephone }) => {
         `)
       })
     })
-    .catch(console.log)
+    .catch(console.error)
 }
 
 module.exports = createAccount
