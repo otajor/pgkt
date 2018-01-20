@@ -13,8 +13,7 @@ class Account extends Component {
   constructor() {
     super();
     this.state = {
-      // pick the first phone number from the accounts object
-      currentAccount: Object.keys(accounts)[0]
+      // TODO pick the first phone number from the accounts object
     };
   }
 
@@ -24,12 +23,13 @@ class Account extends Component {
 
   render() {
     const { currentAccount } = this.state;
+    const accountExists = currentAccount && accounts[currentAccount];
     return (
       <div>
         <div style={styles.navbar}>
           <div style={styles.accountTitleContainer}>
             <span style={styles.accountTitle}>
-              Account #{currentAccount}
+              {accountExists && `Account # ${currentAccount}`}
             </span>
           </div>
           <div style={styles.searchBarContainer}>
@@ -41,17 +41,34 @@ class Account extends Component {
             />
           </div>
         </div>
-        <div style={{...styles.rowContainer, ...styles.topContainer}}>
-          <AccountOverview
-            accounts={accounts}
-            currentAccount={currentAccount}
-          />
-          <Transactions transactions={transactions[currentAccount]}/>
-        </div>
-        <div style={{...styles.rowContainer, ...styles.bottomContainer}}>
-          <IssueCoins />
-          <RepayDebt />
-        </div>
+        {accountExists
+          ? (
+            <div>
+              <div style={{...styles.rowContainer, ...styles.topContainer}}>
+                <AccountOverview
+                  accounts={accounts}
+                  currentAccount={currentAccount}
+                />
+                <Transactions transactions={transactions[currentAccount]}/>
+              </div>
+              <div style={{ ...styles.rowContainer, ...styles.bottomContainer }}>
+                <IssueCoins />
+                <RepayDebt />
+              </div>
+            </div>
+          )
+          : currentAccount
+            ? (
+              <div>
+                <h2 style={styles.helperText}>The selected account does not exist</h2>
+              </div>
+            )
+            : (
+              <div>
+                <h2 style={styles.helperText}>Enter an account number to proceed</h2>
+              </div>
+            )
+        }
       </div>
     );
   }
@@ -88,6 +105,9 @@ const styles = {
   bottomContainer: {
     height: '30vh',
   },
+  helperText: {
+    textAlign: 'center',
+  }
 };
 
 export default Account;

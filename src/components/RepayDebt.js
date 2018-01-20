@@ -18,7 +18,7 @@ class RepayDebt extends Component {
               </FormGroup>{' '}
             </Col>
             <Col md={6} md={6}>
-                <Button type="confirm">Confirm</Button>
+                <Button type="submit">Confirm</Button>
             </Col>
           </Form>
         </div>

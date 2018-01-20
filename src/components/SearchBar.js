@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, Glyphicon } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 class SearchBar extends Component {
 
@@ -18,12 +18,11 @@ class SearchBar extends Component {
   onPressEnter(e) {
     const { input } = this.state;
     if(e.key === 'Enter' && input){
-      this.props.onSubmit(this.state.input);
+      this.props.onSubmit(input);
     }
   }
 
   render() {
-
     const itemsLayout = {
       height: this.props.navbarHeight * 0.8,
       marginTop: this.props.navbarHeight * 0.075, // temporary hack to vertically center it
@@ -34,7 +33,7 @@ class SearchBar extends Component {
       <div>
         <Button
           style={itemsLayout}
-          onPress={() => this.props.onSubmit()}
+          onClick={() => this.props.onSubmit(this.state.input)}
         >
           <Glyphicon glyph="glyphicon glyphicon-search" />
         </Button>
