@@ -18,7 +18,7 @@
 // app.listen(process.env.PORT || 4000, () => console.log('Example app listening on port 4000!'))
 
 
-const { pgktContractInstance, web3 } = require('./web3Client.js')
+const { pgktContractInstance, web3 } = require('./blockchain/web3Client.js')
 const Tx = require('ethereumjs-tx')
 const CONTRACT_ADDRESS = '0x2A44b6A77584D64dd4616917183b3761F43162Ca'
 
