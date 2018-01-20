@@ -35,10 +35,4 @@ const requestAccount = ({ address, privateKey, telephone }) => {
   })
 }
 
-requestAccount({
-  address: '0x9177f91f12a81ef2552be75c9cda3accef689e20',
-  privateKey: '4081bc5523e6721c9c341d3d74f8431bec363ed7e211cf318bc906daa8499821',
-  telephone: '447772899770'
-})
-
 module.exports = requestAccount
