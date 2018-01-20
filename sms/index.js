@@ -1,4 +1,4 @@
-const { ACCOUNT_SID, AUTHTOKEN } = require('../../config.env');
+const { ACCOUNT_SID, AUTHTOKEN } = require('../config.env');
 
 const SID = process.env.SID || ACCOUNT_SID;
 
@@ -8,7 +8,7 @@ const twilio = require('twilio');
 
 const client = new twilio(SID, TOKEN);
 
-const call = (to, body) => {
+const sendSMS = (to, body) => {
   client.messages.create({
     body,
     to, // Text this number
@@ -18,4 +18,4 @@ const call = (to, body) => {
     .catch(err => console.log(err));
 };
 
-module.exports = call;
+module.exports = sendSMS;

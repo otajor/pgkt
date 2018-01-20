@@ -1,6 +1,6 @@
-const createAccount = require('../sms/twilio/createAccount');
-const checkBalance = require('../sms/twilio/checkBalance');
-const sendTransaction = require('../sms/twilio/sendTransaction');
+const createAccount = require('../createAccount');
+const checkBalance = require('../checkBalance');
+const sendTransaction = require('../sendTransaction');
 
 module.exports = (req, res) => {
   const { Body: message, From: telephone } = req.body;
