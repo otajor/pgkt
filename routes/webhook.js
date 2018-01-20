@@ -1,16 +1,16 @@
 module.exports = (req, res) => {
-  const { fromTelephone, message } = req.body
+  const { Body: message, From: telephone } = req.body
   if (!message) {
     return res.send('error')
   }
   if (message.match(/^create.*/)) {
-    return createAccount({ req, res, telephone: fromTelephone })
+    return createAccount({ req, res, telephone })
   }
   if (message.match(/^balance.*/)) {
-    return checkBalance({ req, res, telephone: fromTelephone })
+    return checkBalance({ req, res, telephone })
   }
   if (message.match(/^pay.*/)) {
-    return sendTransaction({ req, res, telephone: fromTelephone, message: message })
+    return sendTransaction({ req, res, telephone, message: message })
   }
   return res.send('error')
 }
