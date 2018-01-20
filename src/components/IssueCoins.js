@@ -11,7 +11,7 @@ class IssueCoins extends Component {
       >
         <div style={styles.div}>
         <Form>
-          <Col xs={6} md={4}>
+          <Col xs={6} md={5}>
         		<FormGroup controlId="enterAmount" style={styles.enterAmount}>
         			<InputGroup.Addon>$</InputGroup.Addon>
             <FormControl type="number" placeholder="Enter Amount" />
@@ -26,7 +26,7 @@ class IssueCoins extends Component {
               </FormControl>
             </FormGroup>{' '}
           </Col>
-          <Col xsHidden md={4}>
+          <Col xsHidden md={3}>
       		    <Button type="submit">Submit</Button>
           </Col>
       	</Form>
