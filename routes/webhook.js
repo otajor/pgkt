@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
   const { Body: message, From: telephone } = req.body
-  console.log(req.body, "<<<<<<<<<<<<< BODY")
+  console.log(req, "<<<<<<<<<<<<< BODY")
   if (!message) {
     return res.send('error')
   }
