@@ -27,12 +27,8 @@ const TransactionRow = ({ transaction }) => (
 
 const styles = {
   bottomContainer: {
-    // display: 'flex',
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
     width: '100%',
     textAlign: 'center',
-    // height: 20,
     fontSize: 16,
   },
   topContainer: {
@@ -47,7 +43,6 @@ const styles = {
   },
   topRight: {
     fontSize: 12,
-    // border: '1px solid orange',
   },
 };
 
