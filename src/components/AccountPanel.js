@@ -8,13 +8,19 @@ const AccountPanel = (props) => (
         {props.title}
       </Panel.Title>
     </Panel.Heading>
-    {props.children}
+    <Panel.Body>
+      {props.children}
+    </Panel.Body>
   </Panel>
 );
 
 AccountPanel.defaultProps = {
   containerStyle: {
-    width: '40%',
+    width: '45%',
+    marginVertical: 20,
+    marginLeft: '1.25%',
+    marginRight: '1.25%',
+    height: '40vh',
     display: 'inline-block',
   },
 };

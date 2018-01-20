@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
+import { ListGroup } from 'react-bootstrap';
 import AccountPanel from './AccountPanel';
+import TransactionRow from './TransactionsRow';
 
 class Transactions extends Component {
+
   render() {
     return (
       <AccountPanel
         title='Transactions'
         style={this.props.containerStyle}
       >
-        <div>
-          <p>Children go here</p>
-          <p>Children go here</p>
-          <p>Children go here</p>
-          <p>Children go here</p>
-        </div>
+        <ListGroup>
+          {this.props.transactions[this.props.currentAccount]
+            .slice(0,5)
+            .map(transaction => (
+              <TransactionRow
+                key={transaction.id}
+                transaction={transaction}
+              />
+            ))}
+        </ListGroup>
       </AccountPanel>
     );
   }
