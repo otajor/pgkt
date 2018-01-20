@@ -14,6 +14,7 @@ class Account extends Component {
     super();
     this.state = {
       // TODO pick the first phone number from the accounts object
+      currentAccount: '07479869730',
     };
   }
 

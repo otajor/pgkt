@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, InputGroup, FormControl, Button, Col } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, Button, Col } from 'react-bootstrap';
 import AccountPanel from './AccountPanel';
 
 class RepayDebt extends Component {
@@ -11,13 +11,12 @@ class RepayDebt extends Component {
       >
         <div style={styles.div}>
           <Form>
-            <Col md={6} md={6}>
+            <Col xs={6} md={6}>
               <FormGroup controlId="enterAmount" style={styles.enterAmount}>
-                <InputGroup.Addon>$</InputGroup.Addon>
-              <FormControl type="number" placeholder="Enter Amount" />
-              </FormGroup>{' '}
+                <FormControl type="number" placeholder="Enter Amount" />
+              </FormGroup>
             </Col>
-            <Col md={6} md={6}>
+            <Col xs={3} md={3}>
                 <Button type="submit">Confirm</Button>
             </Col>
           </Form>
