@@ -20,7 +20,7 @@ class Account extends Component {
         <div style={styles.phoneNumberContainer}>
           <h1>Account #{this.state.currentPhoneNumber}</h1>
         </div>
-        <div style={[styles.row, styles.topContainer]}>
+        <div style={{...styles.rowContainer, ...styles.topContainer}}>
           <AccountOverview
             accounts={accounts}
             currentAccount={this.state.currentPhoneNumber}
@@ -30,7 +30,7 @@ class Account extends Component {
             transactions={transactions}
           />
         </div>
-        <div style={[styles.row, styles.bottomContainer]}>
+        <div style={{...styles.rowContainer, ...styles.bottomContainer}}>
           <IssueCoins />
           <RepayDebt />
         </div>
@@ -41,7 +41,9 @@ class Account extends Component {
 
 const styles = {
   rowContainer: {
-    margin: 'auto',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   phoneNumberContainer: {
     textAlign: 'center',
@@ -50,9 +52,10 @@ const styles = {
 
   },
   topContainer: {
+    height: '50vh',
   },
   bottomContainer: {
-
+    height: '30vh',
   },
 };
 
