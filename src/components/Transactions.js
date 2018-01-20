@@ -27,8 +27,4 @@ class Transactions extends Component {
   }
 }
 
-const styles = {
-
-};
-
 export default Transactions;
