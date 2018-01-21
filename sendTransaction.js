@@ -79,8 +79,4 @@ const sendTransaction = ({ socket }) => ({
   .catch(console.error)
 }
 
-sendTransaction({ socket: { emit: () => {} } })({
-  req: {}, res: { set: () => {}, send: () => {} }, telephone: '+447772899770', message: 'pay 07429507797 1.5'
-})
-
 module.exports = sendTransaction
