@@ -34,7 +34,7 @@ const sendTransaction = ({ socket }) => ({
       amount: amount,
       privateKey: fromAccount.private_key
     })
-    .then(({ hash }) => {
+    .then((hash) => {
       const newFromAccountBalance = Number(fromAccount.balance) - amount
       const newToAccountBalance = Number(toAccount.balance) + amount
       // 3. Update both DB entries to reflect new balances
@@ -63,7 +63,7 @@ const sendTransaction = ({ socket }) => ({
         )
       })
     })
-    .then((res) => {
+    .then(() => {
       res.set('Content-Type', 'text/xml')
       res.send(`
         <?xml version="1.0" encoding="UTF-8"?>

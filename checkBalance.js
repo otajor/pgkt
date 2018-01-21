@@ -8,7 +8,7 @@ const checkBalance = ({ socket }) => ({ req, res, telephone }) => {
   .then((res) => {
     return retrieveBalance(res.address)
   })
-  .then((res) => {
+  .then(() => {
     sendSMS(telephone, 'Your balance: $$$$');
     res.set('Content-Type', 'text/xml')
     res.send(`
