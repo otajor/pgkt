@@ -5,11 +5,9 @@ const pay = require('./web3/pay.js')
 const Bluebird = require('bluebird')
 
 const sendTransaction = ({ socket }) => ({
-  req, res, telephone, message,
+  req, res, telephone, message
 }) => {
-  const [ send, unFormattedTelephone, unformattedAmount ] = message.split(' ')
-  console.log(message, '<<< MESSAGE BEFORE SPLITTING')
-  console.log(send, unFormattedTelephone, unformattedAmount, '<<<<<<<<<<<< MESSAGE AFTER SPLITTING')
+  const [ unusedVar, unFormattedTelephone, unformattedAmount ] = message.split(' ')
   const amount = Number(unformattedAmount) * 100
   const toTelephone = `44${unFormattedTelephone.slice(unFormattedTelephone.indexOf(7))}`.replace(/ /g, '')
   const fromTelephone = telephone.replace('+', '')
@@ -21,21 +19,15 @@ const sendTransaction = ({ socket }) => ({
     console.log({ fromAccount, toAccount })
     // 1. Check balance of ETH wallet (check if balance sufficient)
     if (!fromAccount || !fromAccount.address) {
-      return sendSMS(telephone, `Please set up an account before paying: send 'create' to this number`)
+      return sendSMS(telephone, `You do not have an account yet. Create one by sending 'create' to this number`)
     }
     if (!fromAccount.balance || fromAccount.balance < Number(amount)) {
-      return sendSMS(telephone, 'Balance insufficient')
+      return sendSMS(telephone, `Not enough balance. Your balance is ${(fromAccount.balance / 100).toFixed(2)}`)
     }
     if (!toAccount || !toAccount.address) {
-      return sendSMS(telephone, 'Cannot send to this number (no address)')
+      return sendSMS(telephone, 'You tried to send to a number that is not registered with PGKT yet!')
     }
     // 2. Send ETH from one wallet to the other
-    console.log('PAYING WITH ', {
-      fromAddress: fromAccount.address,
-      toAddress: toAccount.address,
-      amount: amount,
-      privateKey: fromAccount.private_key
-    })
     return pay({
       fromAddress: fromAccount.address,
       toAddress: toAccount.address,
@@ -43,17 +35,16 @@ const sendTransaction = ({ socket }) => ({
       privateKey: fromAccount.private_key
     })
     .then(({ hash }) => {
-      console.log('GOT HASH!', hash)
       const newFromAccountBalance = Number(fromAccount.balance) - amount
       const newToAccountBalance = Number(toAccount.balance) + amount
       // 3. Update both DB entries to reflect new balances
       return Bluebird.props({
         updatedFromAccount: updateAddressBalance({ privateKey: fromAccount.private_key, balance: newFromAccountBalance }),
-        updatedToAccount: updateAddressBalance({ privateKey: toAccount.private_key, balance: newToAccountBalance })
+        updatedToAccount: updateAddressBalance({ privateKey: toAccount.private_key, balance: newToAccountBalance }),
+        hash
       })
     })
-    .then(({ updatedFromAccount, updatedToAccount }) => {
-      console.log('UPDATED ACCOUNTS', { updatedFromAccount, updatedToAccount })
+    .then(({ updatedFromAccount, updatedToAccount, hash }) => {
       // 4. Send success SMS to both numbers stating new balance.
       socket.emit('transactionMade',
         `+${updatedToAccount.telephone}`,
@@ -62,12 +53,17 @@ const sendTransaction = ({ socket }) => ({
         new Date()
       )
       return Bluebird.props({
-        sentFromAccountSMS: sendSMS(telephone, `You paid ${(amount / 100).toFixed(2)}KT to +${toTelephone}. New balance is ${(updatedFromAccount.balance / 100).toFixed(2)}`),
-        sentToAccountSMS: sendSMS(`+${toTelephone}`, `You received ${(amount / 100).toFixed(2)}KT from ${telephone}. New balance is ${(updatedToAccount.balance / 100).toFixed(2)}`)
+        sentFromAccountSMS: sendSMS(
+          telephone,
+          `You paid ${(amount / 100).toFixed(2)}KT to +${toTelephone} (tx hash: ${hash}). New balance is ${(updatedFromAccount.balance / 100).toFixed(2)}`
+        ),
+        sentToAccountSMS: sendSMS(
+          `+${toTelephone}`,
+          `You received ${(amount / 100).toFixed(2)}KT from ${telephone} (tx hash: ${hash}). New balance is ${(updatedToAccount.balance / 100).toFixed(2)}`
+        )
       })
     })
     .then((res) => {
-      console.log('sent SMS!!')
       res.set('Content-Type', 'text/xml')
       res.send(`
         <?xml version="1.0" encoding="UTF-8"?>

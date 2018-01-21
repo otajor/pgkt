@@ -10,7 +10,7 @@ const createWebhookHandler = require('./routes/webhook.js')
 const app = express()
 
 // MIDDLEWARE
-app.use(express.static('public'));
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 // Allow cors from react dev-server
 const corsWhiteList = ['http://localhost:3000']
@@ -29,6 +29,5 @@ const server = app.listen(process.env.PORT || 4000, () => {
   app.post('/webhook', webhookHandler)
   io.on('connection', (client) => {
     console.log('client connected to socket', client)
-  });
-
+  })
 })

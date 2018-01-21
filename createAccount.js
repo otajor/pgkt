@@ -17,7 +17,7 @@ const createAccount = ({ socket }) => ({ req, res, telephone }) => {
         })
       })
       .then((res) => {
-        sendSMS(telephoneInt, 'Your account has been created! Balance is 5.00KT')
+        sendSMS(telephoneInt, `Your account (address: ${address}) has been created! Balance is 5.00KT`)
         res.set('Content-Type', 'text/xml')
         res.send(`
           <?xml version="1.0" encoding="UTF-8"?>
