@@ -33,7 +33,7 @@ class SearchBar extends Component {
       <div>
         <Button
           style={itemsLayout}
-          onClick={() => this.props.onSubmit(this.state.input)}
+          onClick={() => this.state.input && this.props.onSubmit(this.state.input)}
         >
           <Glyphicon glyph="glyphicon glyphicon-search" />
         </Button>
@@ -44,7 +44,7 @@ class SearchBar extends Component {
           onKeyPress={e => this.onPressEnter(e)}
           style={{ ...itemsLayout, ...styles.inputBox }}
           placeholder="Enter Phone Number..."
-          autoFocus={!this.props.currentAccount}
+          autoFocus={!this.props.phoneNumber}
         >
         </input>
       </div>

@@ -10,48 +10,53 @@ const AccountOverview = (props) => (
   >
     <div style={styles.overviewContainer}>
       <Row style={styles.row}>
-        <Col style={styles.halfColumn}>
-          <span style={styles.textTitle}>Public Key</span>
+        <Col style={{ ...styles.halfColumn, ...styles.leftColumn }}>
+          <span style={styles.textTitle}>Address</span>
         </Col>
-        <Col style={{ ...styles.halfColumn, ...styles.alignRight }}>
-          <p>{props.account.publicKey}</p>
+        <Col style={{ ...styles.halfColumn, ...styles.rightColumn, ...styles.address }}>
+          <p>{props.address}</p>
         </Col>
       </Row>
       <Row style={styles.row}>
-        <Col style={styles.halfColumn}>
+        <Col style={{ ...styles.halfColumn, ...styles.leftColumn }}>
           <span style={styles.textTitle}>
             Balance
           </span>
         </Col>
-        <Col style={{ ...styles.halfColumn, ...styles.alignRight }}>
+        <Col style={{ ...styles.halfColumn, ...styles.rightColumn, ...styles.alignRight }}>
           <p>
-            <em>{props.account.balance}</em> PGKT
+            <em>{props.balance}</em> PGKT
           </p>
         </Col>
       </Row>
       <Row style={styles.row}>
-        <Col style={styles.halfColumn}>
+        <Col style={{ ...styles.halfColumn, ...styles.leftColumn }}>
           <span style={styles.textTitle}>
             Loan due
           </span>
         </Col>
-        <Col style={{ ...styles.halfColumn, ...styles.alignRight }}>
+        <Col style={{ ...styles.halfColumn, ...styles.rightColumn, ...styles.alignRight }}>
           <p>
-            <em>{props.account.loanAmount}</em> PGKT
+            <em>{props.loanAmount}</em> PGKT
           </p>
         </Col>
       </Row>
       <Row style={styles.row}>
-        <Col style={styles.halfColumn}>
+        <Col style={{ ...styles.halfColumn, ...styles.leftColumn }}>
           <span style={styles.textTitle}>ID Verified</span>
         </Col>
-        <Col style={{ ...styles.halfColumn, ...styles.alignRight }}>
-          <p>{props.account.verified ? 'yes' : 'no' }</p>
+        <Col style={{ ...styles.halfColumn, ...styles.rightColumn }}>
+          <p>{props.verified ? 'yes' : 'no' }</p>
         </Col>
       </Row>
     </div>
   </AccountPanel>
 );
+
+AccountOverview.defaultProps = {
+  balance: 0,
+  loanAmount: 0,
+}
 
 const styles = {
   overviewContainer: {
@@ -59,16 +64,22 @@ const styles = {
     fontSize: 18,
   },
   row: {
-    width: '70%',
+    width: '80%',
     margin: 'auto',
   },
   halfColumn: {
     display: 'inline-block',
     textAlign: 'left',
-    width: '50%',
   },
-  alignRight: {
+  leftColumn: {
+    width: '25%',
+  },
+  rightColumn: {
+    width: '75%',
     textAlign: 'right',
+  },
+  address: {
+    fontSize: 14,
   },
   textTitle: {
     fontWeight: 'bold',
