@@ -9,6 +9,10 @@ import RepayDebt from './RepayDebt';
 import accounts from '../data/accounts';
 import transactions from '../data/transactions';
 
+import io from 'socket.io-client';
+import config from '../config.js';
+const socket = io(config.serverUrl);
+
 class Account extends Component {
   constructor() {
     super();
@@ -16,6 +20,15 @@ class Account extends Component {
       // TODO pick the first phone number from the accounts object
       currentAccount: '07479869730',
     };
+  }
+
+  componentDidMount() {
+    socket.on('connect', () => {
+      console.log('socket connected to', config.serverUrl);
+    });
+    socket.on('transactionMade', (telephone, description, amount, datetime) => {
+      console.log(telephone, description, amount, datetime);
+    })
   }
 
   setCurrentAccount(phoneNumber) {
@@ -44,7 +57,7 @@ class Account extends Component {
         </div>
         {accountExists
           ? (
-            <div>
+            <div style={styles.panelsContainer}>
               <div style={{...styles.rowContainer, ...styles.topContainer}}>
                 <AccountOverview account={accounts[currentAccount]} />
                 <Transactions transactions={transactions[currentAccount]} />
@@ -91,6 +104,9 @@ const styles = {
   searchBarContainer: {
     width: '40%',
     display: 'inline-block',
+  },
+  panelsContainer: {
+    marginTop: 20,
   },
   rowContainer: {
     width: '95%',

@@ -2,7 +2,7 @@ const sendSMS = require('./sms/index');
 const retrieveBalance = require('./blockchain/retrieveBalance.js')
 const getAccount = require('./db/getAccount.js')
 
-const checkBalance = ({ req, res, telephone }) => {
+const checkBalance = ({ socket }) => ({ req, res, telephone }) => {
   // 1. Retrieve balance of ETH wallet
   getAccount({ telephone })
   .then((res) => {
