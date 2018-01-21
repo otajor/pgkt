@@ -1,5 +1,5 @@
 const sendSMS = require('./sms/index');
-const retrieveBalance = require('./blockchain/retrieveBalance.js')
+const retrieveBalance = require('./web3/retrieveBalance.js')
 const getAccount = require('./db/getAccount.js')
 
 const checkBalance = ({ req, res, telephone }) => {
