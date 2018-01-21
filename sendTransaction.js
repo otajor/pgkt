@@ -53,7 +53,7 @@ const sendTransaction = ({ socket }) => ({
       })
     })
     .then(({ updatedFromAccount, updatedToAccount }) => {
-      console.log('UPDATED ACCOUNTS', res)
+      console.log('UPDATED ACCOUNTS', { updatedFromAccount, updatedToAccount })
       // 4. Send success SMS to both numbers stating new balance.
       socket.emit('transactionMade',
         `+${updatedToAccount.telephone}`,
@@ -62,8 +62,8 @@ const sendTransaction = ({ socket }) => ({
         new Date()
       )
       return Bluebird.props({
-        sentFromAccountSMS: sendSMS(telephone, `You paid ${(amount / 100).toFixed(2)}KT to +${toTelephone}. New balance is ${updatedFromAccount.balance}`),
-        sentToAccountSMS: sendSMS(`+${toTelephone}`, `You received ${(amount / 100).toFixed(2)}KT from ${telephone}. New balance is ${updatedToAccount.balance}`)
+        sentFromAccountSMS: sendSMS(telephone, `You paid ${(amount / 100).toFixed(2)}KT to +${toTelephone}. New balance is ${(updatedFromAccount.balance / 100).toFixed(2)}`),
+        sentToAccountSMS: sendSMS(`+${toTelephone}`, `You received ${(amount / 100).toFixed(2)}KT from ${telephone}. New balance is ${(updatedToAccount.balance / 100).toFixed(2)}`)
       })
     })
     .then((res) => {
@@ -78,5 +78,9 @@ const sendTransaction = ({ socket }) => ({
   })
   .catch(console.error)
 }
+
+sendTransaction({ socket: { emit: () => {} } })({
+  req: {}, res: { set: () => {}, send: () => {} }, telephone: '+447772899770', message: 'pay 07429507797 1.5'
+})
 
 module.exports = sendTransaction
