@@ -98,7 +98,7 @@ class Account extends Component {
                 </div>
               </div>
               <div style={{ ...styles.rowContainer, ...styles.bottomContainer }}>
-                <Transactions transactions={transactions[phoneNumber]} />
+                <Transactions transactions={transactions} />
               </div>
             </div>
           )
