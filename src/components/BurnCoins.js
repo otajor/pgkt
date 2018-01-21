@@ -7,7 +7,7 @@ class RepayDebt extends Component {
     return (
       <AccountPanel
         isTopRightContainer
-        title='Repay Debt with Cash'
+        title='Burn Coins'
         style={this.props.containerStyle}
       >
         <div style={styles.div}>
@@ -18,7 +18,7 @@ class RepayDebt extends Component {
               </FormGroup>
             </Col>
             <Col xs={2} md={2}>
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Burn</Button>
             </Col>
           </Form>
         </div>

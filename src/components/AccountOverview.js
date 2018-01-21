@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 const AccountOverview = (props) => (
   <AccountPanel
     formatAsBody
-    title='AccountOverview'
+    title='Account Overview'
     style={props.containerStyle}
   >
     <div style={styles.overviewContainer}>
@@ -43,7 +43,7 @@ const AccountOverview = (props) => (
       </Row>
       <Row style={styles.row}>
         <Col style={styles.halfColumn}>
-          <span style={styles.textTitle}>Verified</span>
+          <span style={styles.textTitle}>ID Verified</span>
         </Col>
         <Col style={{ ...styles.halfColumn, ...styles.alignRight }}>
           <p>{props.account.verified ? 'yes' : 'no' }</p>

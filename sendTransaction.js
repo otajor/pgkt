@@ -4,8 +4,8 @@ const updateAddressBalance = require('./db/updateAddressBalance.js')
 const pay = require('./web3/pay.js')
 const Bluebird = require('bluebird')
 
-const sendTransaction = ({
-  req, res, telephone, message
+const sendTransaction = ({ socket }) => ({
+  req, res, telephone, message,
 }) => {
   const [ send, unFormattedTelephone, unformattedAmount ] = message.split(' ')
   console.log(message, '<<< MESSAGE BEFORE SPLITTING')
@@ -55,6 +55,12 @@ const sendTransaction = ({
     .then(({ updatedFromAccount, updatedToAccount }) => {
       console.log('UPDATED ACCOUNTS', res)
       // 4. Send success SMS to both numbers stating new balance.
+      socket.emit('transactionMade',
+        `+${updatedToAccount.telephone}`,
+        'Payment made',
+        (amount / 100).toFixed(2),
+        new Date()
+      )
       return Bluebird.props({
         sentFromAccountSMS: sendSMS(telephone, `You paid ${(amount / 100).toFixed(2)}KT to +${toTelephone}. New balance is ${updatedFromAccount.balance}`),
         sentToAccountSMS: sendSMS(`+${toTelephone}`, `You received ${(amount / 100).toFixed(2)}KT from ${telephone}. New balance is ${updatedToAccount.balance}`)

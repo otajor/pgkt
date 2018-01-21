@@ -6,13 +6,14 @@ class IssueCoins extends Component {
   render() {
     return (
       <AccountPanel
+        isTopRightContainer
         title='Issue Coins'
         style={this.props.containerStyle}
       >
         <div style={styles.div}>
         <Form>
           <Col xs={5} md={5}>
-            <FormGroup controlId="enterAmount" style={styles.enterAmount}>
+            <FormGroup controlId="issueCoins" style={styles.enterAmount}>
               <FormControl type="number" placeholder="Enter Amount" />
             </FormGroup>
           </Col>
@@ -25,8 +26,8 @@ class IssueCoins extends Component {
               </FormControl>
             </FormGroup>
           </Col>
-          <Col xsHidden md={3}>
-      		    <Button type="submit">Submit</Button>
+          <Col xsHidden md={2}>
+      		    <Button type="submit">Issue</Button>
           </Col>
       	</Form>
         </div>
@@ -37,8 +38,8 @@ class IssueCoins extends Component {
 
 const styles = {
   div: {
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   enterAmount: {
     display: 'flex',

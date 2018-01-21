@@ -3,7 +3,7 @@ const fetchUnusedAddress = require('./db/fetchUnusedAddress.js')
 const updateAddressTelephone = require('./db/updateAddressTelephone.js')
 const requestAccount = require('./web3/requestAccount.js')
 
-const createAccount = ({ req, res, telephone }) => {
+const createAccount = ({ socket }) => ({ req, res, telephone }) => {
   const telephoneInt = telephone.replace('+', '')
   return fetchUnusedAddress()
     .then(({ address, privateKey }) => {

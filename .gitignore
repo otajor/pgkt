@@ -61,3 +61,9 @@ package-lock.json
 
 # twilio credentials
 config.env.js
+
+# WEBPACK / REACT bundle large diffs
+public/index.html
+public/static
+public/asset-manifest.json
+public/service-worker.js

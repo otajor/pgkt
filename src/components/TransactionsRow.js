@@ -5,7 +5,7 @@ import { ListGroupItem } from 'react-bootstrap';
 const formatDate = (datetime) => moment(datetime).fromNow();
 
 const TransactionRow = ({ transaction }) => (
-  <ListGroupItem href="#">
+  <ListGroupItem href="#" style={styles.transactionContainer}>
     <div style={styles.topContainer}>
       <span style={styles.topLeft}>
         {transaction.id}
@@ -29,10 +29,14 @@ const TransactionRow = ({ transaction }) => (
 );
 
 const styles = {
+  transactionContainer: {
+    width: '80%',
+    margin: 'auto',
+  },
   bottomContainer: {
     width: '100%',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     marginTop: 2.5,
   },
   column: {
@@ -51,16 +55,16 @@ const styles = {
     textAlign: 'right',
   },
   topContainer: {
+    width: '100%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
   },
   topLeft: {
-    fontSize: 9,
+    fontSize: 11,
   },
   topRight: {
-    fontSize: 12,
+    fontSize: 13,
   },
 };
 

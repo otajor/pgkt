@@ -3,11 +3,16 @@ import SearchBar from './SearchBar';
 import AccountOverview from './AccountOverview';
 import Transactions from './Transactions';
 import IssueCoins from './IssueCoins';
+import BurnCoins from './BurnCoins';
 import RepayDebt from './RepayDebt';
 
 // data is hard-coded for now
 import accounts from '../data/accounts';
 import transactions from '../data/transactions';
+
+import io from 'socket.io-client';
+import config from '../config.js';
+const socket = io(config.serverUrl);
 
 class Account extends Component {
   constructor() {
@@ -16,6 +21,15 @@ class Account extends Component {
       // TODO pick the first phone number from the accounts object
       currentAccount: '07479869730',
     };
+  }
+
+  componentDidMount() {
+    socket.on('connect', () => {
+      console.log('socket connected to', config.serverUrl);
+    });
+    socket.on('transactionMade', (telephone, description, amount, datetime) => {
+      console.log(telephone, description, amount, datetime);
+    })
   }
 
   setCurrentAccount(phoneNumber) {
@@ -44,14 +58,17 @@ class Account extends Component {
         </div>
         {accountExists
           ? (
-            <div>
+            <div style={styles.panelsContainer}>
               <div style={{...styles.rowContainer, ...styles.topContainer}}>
                 <AccountOverview account={accounts[currentAccount]} />
-                <Transactions transactions={transactions[currentAccount]} />
+                <div style={styles.topRightContainer}>
+                  <IssueCoins />
+                  <BurnCoins />
+                  <RepayDebt />
+                </div>
               </div>
               <div style={{ ...styles.rowContainer, ...styles.bottomContainer }}>
-                <IssueCoins />
-                <RepayDebt />
+                <Transactions transactions={transactions[currentAccount]} />
               </div>
             </div>
           )
@@ -92,6 +109,9 @@ const styles = {
     width: '40%',
     display: 'inline-block',
   },
+  panelsContainer: {
+    marginTop: 20,
+  },
   rowContainer: {
     width: '95%',
     margin: 'auto',
@@ -100,11 +120,14 @@ const styles = {
     justifyContent: 'flex-start',
   },
   topContainer: {
-    height: '50vh',
+    height: '48vh',
   },
-  bottomContainer: {
-    height: '30vh',
+  topRightContainer: {
+    width: '47.5%',
+    display: 'inline-block',
+    flexDirection: 'column',
   },
+  bottomContainer: {}, // NOTE keep for flexibility
   helperText: {
     textAlign: 'center',
   }

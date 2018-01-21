@@ -11,6 +11,7 @@ class Transactions extends Component {
         formatAsBody
         title='Transactions'
         style={this.props.containerStyle}
+        containerStyle={styles.panelContainer}
       >
         <ListGroup>
           {this.props.transactions
@@ -27,5 +28,11 @@ class Transactions extends Component {
     );
   }
 }
+
+const styles = {
+  panelContainer: {
+    width: '100%',
+  },
+};
 
 export default Transactions;
