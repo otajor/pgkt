@@ -7,7 +7,7 @@ const sendTransaction = ({
   // 2. Send ETH from one wallet to the other
   // 3. Update both DB entries to reflect new balances
   // 3. Send success SMS to both numbers stating new balance.
-  sendSMS(telephone, 'testing transaction');
+  sendSMS(telephone, 'You paid 500KT to +445077977429');
   res.set('Content-Type', 'text/xml')
   res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
