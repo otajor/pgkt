@@ -33,7 +33,7 @@ class SearchBar extends Component {
       <div>
         <Button
           style={itemsLayout}
-          onClick={() => this.props.onSubmit(this.state.input)}
+          onClick={() => this.state.input && this.props.onSubmit(this.state.input)}
         >
           <Glyphicon glyph="glyphicon glyphicon-search" />
         </Button>
