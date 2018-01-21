@@ -3,7 +3,7 @@ const config = {
     "serverUrl": "http://localhost:4000",
   },
   "production": {
-    "serverUrl": "https://pgkt.herokuapp.com/",
+    "serverUrl": "https://pgkt.herokuapp.com",
   },
 };
 
