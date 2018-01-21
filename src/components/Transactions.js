@@ -13,21 +13,32 @@ class Transactions extends Component {
         style={this.props.containerStyle}
         containerStyle={styles.panelContainer}
       >
-        <ListGroup>
-          {this.props.transactions
-            // TODO paginate this list?
-            .slice(0,5) // get only the first 5
-            .map(transaction => (
-              <TransactionRow
-                key={transaction.id}
-                transaction={transaction}
-              />
-            ))}
-        </ListGroup>
+        {this.props.transactions.length
+          ? (
+            <ListGroup>
+              {this.props.transactions
+                .map(transaction => (
+                  <TransactionRow
+                    key={transaction.id}
+                    transaction={transaction}
+                  />
+                ))}
+            </ListGroup>
+          )
+          : (
+            <div>
+              No transactions have been made
+            </div>
+          )
+        }
       </AccountPanel>
     );
   }
 }
+
+Transactions.defaultProps = {
+  transactions: [],
+};
 
 const styles = {
   panelContainer: {

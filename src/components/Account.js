@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import SearchBar from './SearchBar';
 import AccountOverview from './AccountOverview';
 import Transactions from './Transactions';
@@ -7,23 +8,32 @@ import BurnCoins from './BurnCoins';
 import RepayDebt from './RepayDebt';
 
 // data is hard-coded for now
-import accounts from '../data/accounts';
 import transactions from '../data/transactions';
 
 import io from 'socket.io-client';
 import config from '../config.js';
-const socket = io(config.serverUrl);
+const { serverUrl } = config;
+const socket = io(serverUrl);
 
 class Account extends Component {
   constructor() {
     super();
     this.state = {
       // TODO pick the first phone number from the accounts object
-      currentAccount: '07479869730',
+      accounts: [],
     };
   }
 
   componentDidMount() {
+    axios.get(`${serverUrl}/get-all-account-data`)
+      .then(({ data }) => {
+        this.setAllAccounts(data.payload || [])
+        this.setFirstAccount()
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
     socket.on('connect', () => {
       console.log('socket connected to', config.serverUrl);
     });
@@ -32,27 +42,42 @@ class Account extends Component {
     })
   }
 
-  setCurrentAccount(phoneNumber) {
-    this.setState({ currentAccount: phoneNumber });
+  setAllAccounts(accounts) {
+    this.setState({ accounts });
+  }
+
+  setFirstAccount() {
+    if (this.state.accounts.length) {
+      const account = this.state.accounts.find(({ telephone }) => telephone);
+      this.setState({
+        account,
+        phoneNumber: account.telephone,
+      });
+    }
+  }
+
+  setPhoneNumber(phoneNumber) {
+    this.setState({ phoneNumber });
   }
 
   render() {
-    const { currentAccount } = this.state;
-    const accountExists = currentAccount && accounts[currentAccount];
+    const { accounts, phoneNumber } = this.state;
+    const accountExists = phoneNumber && accounts.find(({ telephone }) => telephone === phoneNumber);
+    const account = this.state.account;
     return (
       <div>
         <div style={styles.navbar}>
           <div style={styles.accountTitleContainer}>
             <span style={styles.accountTitle}>
-              {accountExists && `Account # ${currentAccount}`}
+              {accountExists && `Account +${phoneNumber}`}
             </span>
           </div>
           <div style={styles.searchBarContainer}>
             <SearchBar
               accounts={accounts}
-              currentAccount={currentAccount}
+              phoneNumber={phoneNumber}
               navbarHeight={NAVBAR_HEIGHT}
-              onSubmit={(value) => this.setCurrentAccount(value)}
+              onSubmit={(value) => this.setPhoneNumber(value)}
             />
           </div>
         </div>
@@ -60,7 +85,12 @@ class Account extends Component {
           ? (
             <div style={styles.panelsContainer}>
               <div style={{...styles.rowContainer, ...styles.topContainer}}>
-                <AccountOverview account={accounts[currentAccount]} />
+                <AccountOverview
+                  address={account.address}
+                  balance={account.balance}
+                  loanAmount={account.loanAmount}
+                  idVerified={account.idVerified}
+                />
                 <div style={styles.topRightContainer}>
                   <IssueCoins />
                   <BurnCoins />
@@ -68,11 +98,11 @@ class Account extends Component {
                 </div>
               </div>
               <div style={{ ...styles.rowContainer, ...styles.bottomContainer }}>
-                <Transactions transactions={transactions[currentAccount]} />
+                <Transactions transactions={transactions[phoneNumber]} />
               </div>
             </div>
           )
-          : currentAccount
+          : phoneNumber
             ? (
               <div>
                 <h2 style={styles.helperText}>The selected account does not exist</h2>

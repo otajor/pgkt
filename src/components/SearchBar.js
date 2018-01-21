@@ -44,7 +44,7 @@ class SearchBar extends Component {
           onKeyPress={e => this.onPressEnter(e)}
           style={{ ...itemsLayout, ...styles.inputBox }}
           placeholder="Enter Phone Number..."
-          autoFocus={!this.props.currentAccount}
+          autoFocus={!this.props.phoneNumber}
         >
         </input>
       </div>
