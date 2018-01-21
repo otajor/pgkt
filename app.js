@@ -5,7 +5,6 @@ const path = require('path')
 const socket = require('socket.io')
 
 const getAllDataHandler = require('./routes/getAllAccountData.js')
-const issueCoinsHandler = require('./routes/issueCoins.js')
 const createWebhookHandler = require('./routes/webhook.js')
 
 const app = express()
@@ -20,7 +19,6 @@ app.use(cors({ origin: corsWhiteList }))
 // Routes
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')))
 app.get('/get-all-account-data', getAllDataHandler)
-app.post('/issue-coins', issueCoinsHandler)
 
 const server = app.listen(process.env.PORT || 4000, () => {
   console.log('Example app listening on port 4000!')
