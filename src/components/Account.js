@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import AccountOverview from './AccountOverview';
 import Transactions from './Transactions';
 import IssueCoins from './IssueCoins';
+import BurnCoins from './BurnCoins';
 import RepayDebt from './RepayDebt';
 
 // data is hard-coded for now
@@ -60,11 +61,14 @@ class Account extends Component {
             <div style={styles.panelsContainer}>
               <div style={{...styles.rowContainer, ...styles.topContainer}}>
                 <AccountOverview account={accounts[currentAccount]} />
-                <Transactions transactions={transactions[currentAccount]} />
+                <div style={styles.topRightContainer}>
+                  <IssueCoins />
+                  <BurnCoins />
+                  <RepayDebt />
+                </div>
               </div>
               <div style={{ ...styles.rowContainer, ...styles.bottomContainer }}>
-                <IssueCoins />
-                <RepayDebt />
+                <Transactions transactions={transactions[currentAccount]} />
               </div>
             </div>
           )
@@ -116,11 +120,14 @@ const styles = {
     justifyContent: 'flex-start',
   },
   topContainer: {
-    height: '50vh',
+    height: '48vh',
   },
-  bottomContainer: {
-    height: '30vh',
+  topRightContainer: {
+    width: '47.5%',
+    display: 'inline-block',
+    flexDirection: 'column',
   },
+  bottomContainer: {}, // NOTE keep for flexibility
   helperText: {
     textAlign: 'center',
   }

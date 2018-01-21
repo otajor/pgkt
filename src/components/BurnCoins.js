@@ -7,7 +7,7 @@ class RepayDebt extends Component {
     return (
       <AccountPanel
         isTopRightContainer
-        title='Repay Debt with Cash'
+        title='Burn Coins'
         style={this.props.containerStyle}
       >
         <div style={styles.div}>
