@@ -26,8 +26,8 @@ class IssueCoins extends Component {
               </FormControl>
             </FormGroup>
           </Col>
-          <Col xsHidden md={3}>
-      		    <Button type="submit">Submit</Button>
+          <Col xsHidden md={2}>
+      		    <Button type="submit">Issue</Button>
           </Col>
       	</Form>
         </div>

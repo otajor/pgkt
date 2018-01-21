@@ -18,7 +18,7 @@ class RepayDebt extends Component {
               </FormGroup>
             </Col>
             <Col xs={2} md={2}>
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Burn</Button>
             </Col>
           </Form>
         </div>
