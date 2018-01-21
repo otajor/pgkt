@@ -20,13 +20,14 @@
     "socket.io-client": "^2.0.4",
     "twilio": "^3.11.0",
     "uuid": "^3.2.1",
-    "web3": "^0.20.4"
+    "web3": "^0.20.4",
+    "webpack": "^3.10.0"
   },
   "scripts": {
     "start": "node app.js",
     "startmon": "nodemon app.js",
     "start:react": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_ENV=production && webpack --progress",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

@@ -4,16 +4,18 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const socket = require('socket.io')
 
-const app = express()
-
 const getAllDataHandler = require('./routes/getAllAccountData.js')
 const issueCoinsHandler = require('./routes/issueCoins.js')
 const createWebhookHandler = require('./routes/webhook.js')
 
-// Middleware
+const app = express()
+
+// MIDDLEWARE
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }))
+// Allow cors from react dev-server
 const corsWhiteList = ['http://localhost:3000']
 app.use(cors({ origin: corsWhiteList }))
-app.use(bodyParser.urlencoded({ extended: false }))
 
 // Routes
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')))
