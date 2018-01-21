@@ -7,14 +7,11 @@ const createAccount = ({ req, res, telephone }) => {
   const telephoneInt = telephone.replace('+', '')
   return fetchUnusedAddress()
     .then(({ address, privateKey }) => {
-      console.log('GOT ADDRESS: ', { address, privateKey })
       return requestAccount({ address, privateKey, telephone: telephoneInt })
       .then((hash) => {
-        console.log('GOT ACCOUNT: ', hash)
         return updateAddress({ privateKey, telephone: telephoneInt })
       })
       .then((res) => {
-        console.log('UPDATEDD ADDRESS: ', res)
         sendSMS(telephoneInt, 'Your account has been created with 5KT in it')
         res.set('Content-Type', 'text/xml')
         res.send(`
